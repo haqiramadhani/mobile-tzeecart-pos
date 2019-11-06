@@ -38,7 +38,7 @@ const Login = (props) => {
           <Label>
             <Text style={styles.input}>Username</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, username: text})}} value={data.username} style={styles.input}/>
+          <Input onChangeText={(text) => {setData({...data, username: text})}} value={data.username} style={styles.input} autoFocus/>
         </Item>
         <Item floatingLabel>
           <Label>
