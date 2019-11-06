@@ -10,6 +10,11 @@ const Login = (props) => {
     username: '',
     password: '',
   });
+  let inputs = {};
+
+  const focusTheField = (id) => {
+    inputs[id]._root.focus()
+  };
 
   const handleLogin = () => {
     props.dispatch(login(data))
@@ -38,13 +43,28 @@ const Login = (props) => {
           <Label>
             <Text style={styles.input}>Username</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, username: text})}} value={data.username} style={styles.input} autoFocus/>
+          <Input
+            onChangeText={(text) => {setData({...data, username: text})}}
+            value={data.username}
+            style={styles.input}
+            returnKeyType={"next"}
+            blurOnSubmit={ false }
+            onSubmitEditing={() => { focusTheField('password'); }}
+          />
         </Item>
         <Item floatingLabel>
           <Label>
             <Text style={styles.input}>Password</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, password: text})}} value={data.password} style={styles.input} secureTextEntry={true}/>
+          <Input
+            onChangeText={(text) => {setData({...data, password: text})}}
+            value={data.password}
+            style={styles.input}
+            secureTextEntry={true}
+            returnKeyType={"go"}
+            getRef={input => { inputs['password'] = input }}
+            onSubmitEditing={() => { handleLogin() }}
+          />
         </Item>
       </Form>
       <Button style={styles.buttonLogin} onPress={()=>{handleLogin()}} title={''} block rounded>

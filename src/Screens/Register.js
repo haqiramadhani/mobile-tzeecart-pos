@@ -6,13 +6,18 @@ import {connect} from "react-redux";
 import {register} from '../Redux/Actions/auth';
 
 const Register = (props) => {
-    const [data, setData] = useState({
-      name: '',
-      username: '',
-      email: '',
-      telp: '',
-      password: '',
-    });
+  const [data, setData] = useState({
+    name: '',
+    username: '',
+    email: '',
+    telp: '',
+    password: '',
+  });
+  let inputs = {};
+
+  const focusTheField = (id) => {
+    inputs[id]._root.focus()
+  };
 
   const handleRegister = () => {
     props.dispatch(register(data))
@@ -39,31 +44,66 @@ const Register = (props) => {
           <Label>
             <Text style={styles.input}>Full name</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, name: text})}} value={data.name} style={styles.input}/>
+          <Input
+            onChangeText={(text) => {setData({...data, name: text})}}
+            value={data.name}
+            style={styles.input}
+            returnKeyType={"next"}
+            onSubmitEditing={() => { focusTheField('username'); }}
+          />
         </Item>
         <Item floatingLabel>
           <Label>
             <Text style={styles.input}>Username</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, username: text})}} value={data.username} style={styles.input}/>
+          <Input
+            onChangeText={(text) => {setData({...data, username: text})}}
+            value={data.username}
+            style={styles.input}
+            returnKeyType={"next"}
+            getRef={input => { inputs['username'] = input }}
+            onSubmitEditing={() => { focusTheField('email'); }}
+          />
         </Item>
         <Item floatingLabel>
           <Label>
             <Text style={styles.input}>Email</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, email: text})}} value={data.email} style={styles.input}/>
+          <Input
+            onChangeText={(text) => {setData({...data, email: text})}}
+            value={data.email}
+            style={styles.input}
+            returnKeyType={"next"}
+            getRef={input => { inputs['email'] = input }}
+            onSubmitEditing={() => { focusTheField('telp'); }}
+          />
         </Item>
         <Item floatingLabel>
           <Label>
             <Text style={styles.input}>Phone</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, telp: text})}} value={data.telp} style={styles.input}/>
+          <Input
+            onChangeText={(text) => {setData({...data, telp: text})}}
+            value={data.telp}
+            style={styles.input}
+            returnKeyType={"next"}
+            getRef={input => { inputs['telp'] = input }}
+            onSubmitEditing={() => { focusTheField('password'); }}
+          />
         </Item>
         <Item floatingLabel>
           <Label>
             <Text style={styles.input}>Password</Text>
           </Label>
-          <Input onChangeText={(text) => {setData({...data, password: text})}} value={data.password} style={styles.input} secureTextEntry={true}/>
+          <Input
+            onChangeText={(text) => {setData({...data, password: text})}}
+            value={data.password}
+            style={styles.input}
+            secureTextEntry={true}
+            returnKeyType={"go"}
+            getRef={input => { inputs['password'] = input }}
+            onSubmitEditing={() => { handleRegister() }}
+          />
         </Item>
       </Form>
       <Button style={styles.buttonRegister} onPress={()=>{handleRegister()}} title={''} block rounded>
