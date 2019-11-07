@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Image, AsyncStorage} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import {Item, Input, Form, Label, Text, Button} from 'native-base';
 import bgImage from '../../assets/bg-register.png';
 import {connect} from "react-redux";
@@ -31,8 +31,6 @@ const Register = (props) => {
       })
       .catch(error => alert(error.value.data.message));
   };
-
-  AsyncStorage.getItem('token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('StackHome');});
 
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Image, AsyncStorage} from 'react-native';
 import {Item, Input, Form, Label, Text, Button} from 'native-base';
 import bgImage from '../../assets/bg-login.png';
@@ -23,7 +23,7 @@ const Login = (props) => {
           AsyncStorage.setItem('token', response.value.data.results.token, () => {});
           AsyncStorage.setItem('user', response.value.data.results.username, () => {});
           alert(response.value.data.message);
-          props.navigation.navigate('StackHome');
+          props.navigation.navigate('BottomNav');
         } else {
           alert(response.value.data.message);
         }
@@ -31,7 +31,9 @@ const Login = (props) => {
       .catch(error => alert(error.value.data.message));
   };
 
-  AsyncStorage.getItem('token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('StackHome')});
+  useEffect(()=>{
+    AsyncStorage.getItem('token', () => {}).then((token) => {if (token !== null) props.navigation.navigate('BottomNav')});
+  },[]);
 
   return (
     <View style={styles.container}>

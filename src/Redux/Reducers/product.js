@@ -61,11 +61,12 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'POST_PRODUCT_FULFILLED':
+      const newListProduct = state.listProducts.push(action.payload.data.results);
       return {
         ...state,
         isLoading: false,
         isFulfilled: true,
-        listProducts: action.payload.data.results,
+        listProducts: newListProduct,
       };
     case 'UPDATE_PRODUCT_PENDING':
       return {
@@ -81,13 +82,15 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'UPDATE_PRODUCT_FULFILLED':
-      const updatedListProduct = state.listProducts;
-      updatedListProduct.push(action.payload.data.results);
+      const updatedListProducts = state.listProducts.map(product=>{
+        if (product.id === action.payload.data.results.id) return action.payload.data.results;
+        return product;
+      });
       return {
         ...state,
         isLoading: false,
         isFulfilled: true,
-        listProducts: action.payload.data.results,
+        listProducts: updatedListProducts,
       };
     case 'DELETE_PRODUCT_PENDING':
       return {
@@ -103,11 +106,12 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'DELETE_PRODUCT_FULFILLED':
+      const deletedListProducts = state.listProducts.filter(product=>product !== action.payload.data.results.id);
       return {
         ...state,
         isLoading: false,
         isFulfilled: true,
-        listProducts: action.payload.data.results,
+        listProducts: deletedListProducts,
       };
     default:
       return {

@@ -1,6 +1,7 @@
 import {createStackNavigator} from "react-navigation-stack";
 import {createAppContainer, createSwitchNavigator} from "react-navigation";
-import {Home, Login, Register} from './Screens';
+import {Login, Register} from './Screens';
+import BottomNav from './Component/BottomNav';
 
 const StackAuth = createStackNavigator(
   {
@@ -13,20 +14,20 @@ const StackAuth = createStackNavigator(
   }
 );
 
-const StackHome = createStackNavigator(
-  {
-    Home,
-  },
-  {
-    initialRouteName: 'Home',
-    headerMode: 'none',
-  }
-);
+// const StackHome = createSwitchNavigator (
+//   {
+//     Home,
+//   },
+//   {
+//     initialRouteName: 'Home',
+//     headerMode: 'none',
+//   }
+// );
 
 const Router = createSwitchNavigator(
   {
     StackAuth,
-    StackHome,
+    BottomNav,
   },
   {
     initialRouteName: 'StackAuth',
