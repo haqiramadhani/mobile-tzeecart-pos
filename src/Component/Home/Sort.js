@@ -26,10 +26,6 @@ const Sort = (props) => {
       <View style={{
         flexDirection: 'row',
       }}>
-        {/*<TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}><Icon name={'ios-funnel'} fontSize='13'/><Text>Default</Text></TouchableOpacity>*/}
-        {/*<TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}><Icon name={'ios-funnel'} fontSize='13'/><Text>Name</Text></TouchableOpacity>*/}
-        {/*<TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}><Icon name={'ios-funnel'} fontSize='13'/><Text>Category</Text></TouchableOpacity>*/}
-        {/*<TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}><Icon name={'ios-funnel'} fontSize='13'/><Text>Date</Text></TouchableOpacity>*/}
         <TouchableOpacity onPress={()=>{setSort('id')}}><Text style={{color: 'white',paddingHorizontal: 5, backgroundColor: '#706F71', borderRadius: 10, marginRight: 5}}>Default</Text></TouchableOpacity>
         <TouchableOpacity onPress={()=>{setSort('name')}}><Text style={{color: 'white',paddingHorizontal: 5, backgroundColor: '#706F71', borderRadius: 10, marginRight: 5}}>Name</Text></TouchableOpacity>
         <TouchableOpacity onPress={()=>{setSort('category')}}><Text style={{color: 'white',paddingHorizontal: 5, backgroundColor: '#706F71', borderRadius: 10, marginRight: 5}}>Category</Text></TouchableOpacity>
@@ -37,9 +33,9 @@ const Sort = (props) => {
       </View>
       <View>
         {(order === 'ascending') ? (
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={()=>{setOrder('descending')}}><Icon name={'arrow-dropdown-circle'} style={{fontSize: 20, marginRight: 5}}/><Text>Asc</Text></TouchableOpacity>
+          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={()=>{setOrder('descending')}}><Icon name={'arrow-dropdown'} style={{fontSize: 20, marginRight: 5}}/><Text>Asc</Text></TouchableOpacity>
         ) : (
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={()=>{setOrder('ascending')}}><Icon name={'arrow-dropup-circle'} style={{fontSize: 20, marginRight: 5}}/><Text>Desc</Text></TouchableOpacity>
+          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}} onPress={()=>{setOrder('ascending')}}><Icon name={'arrow-dropup'} style={{fontSize: 20, marginRight: 5}}/><Text>Desc</Text></TouchableOpacity>
         )}
       </View>
     </View>

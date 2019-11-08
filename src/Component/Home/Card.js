@@ -12,7 +12,7 @@ const Card = (props) => {
       <View>
         <View style={{
           // width: 130,
-          height: 150,
+          height: 100,
           borderRadius: 5,
         }}>
           <Image
@@ -23,7 +23,7 @@ const Card = (props) => {
             style={{
               height: '85%',
               width: '100%',
-              resizeMode: 'cover',
+              resizeMode: 'stretch',
               borderRadius: 5,
             }}
           />

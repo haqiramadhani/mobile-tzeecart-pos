@@ -52,13 +52,16 @@ const Product = (props) => {
           </View>
         </SwipeRow>
       ))}
-      <Button transparent style={{
+      <Button style={{
         position: 'absolute',
         fontSize: 20,
         borderRadius: 25,
         bottom: 15,
         right: 15,
-      }}><Icon name={'add'}/></Button>
+        backgroundColor: '#0193B7',
+      }}><Icon name={'add'} style={{
+        color: 'white',
+      }}/></Button>
     </View>
   )
 };

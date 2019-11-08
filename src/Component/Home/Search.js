@@ -45,7 +45,7 @@ const Search = (props) => {
       />
       <Icon name={'search'} style={{
         position: 'absolute',
-        top: 25,
+        top: 20,
         left: 30,
       }}/>
     </View>

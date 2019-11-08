@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, ScrollView, TouchableOpacity, FlatList} from 'react-native';
 import {getProduct} from '../Redux/Actions/product';
+import {getCategory} from '../Redux/Actions/category';
 import {addToCart} from "../Redux/Actions/cart";
 import {connect} from 'react-redux';
 import StatusBar from "../Component/StatusBar";
@@ -23,7 +24,8 @@ const Home = (props) => {
     props.dispatch(getProduct({
       per_page: 12,
       page: 1
-    }))
+    }));
+    props.dispatch(getCategory({}))
   },[]);
   // AsyncStorage.clear(()=>{}).then(() => props.navigation.navigate('StackAuth'));
   return (
