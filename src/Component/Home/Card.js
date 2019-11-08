@@ -16,7 +16,10 @@ const Card = (props) => {
           borderRadius: 5,
         }}>
           <Image
-            source={require('../../../assets/upload/olos.png')}
+            source={{
+              uri: props.image,
+              cache: 'only-if-cached',
+            }}
             style={{
               height: '85%',
               width: '100%',

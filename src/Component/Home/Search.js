@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TextInput} from 'react-native';
 import {Icon} from 'native-base';
+import {searchProduct} from "../../Redux/Actions/product";
+import {connect} from "react-redux";
 
-const Search = () => {
+
+const Search = (props) => {
+  const [keyword, setKeyword] = useState('');
+
+  const handleSearch = () => {
+    if (keyword !== '') {
+      props.dispatch(searchProduct({
+        q: keyword,
+        per_page: 12,
+        page: 1,
+      }));
+    }
+  };
+  // useEffect(()=>{
+  // },[keyword]);
+
   return (
     <View style={{
       position: 'relative',
@@ -20,6 +37,11 @@ const Search = () => {
           paddingLeft: 45,
           paddingRight: 20,
         }}
+        value={keyword}
+        onChangeText={(text) => {setKeyword(text)}}
+        clearTextOnFocus
+        returnKeyType={"search"}
+        onSubmitEditing={()=>{handleSearch()}}
       />
       <Icon name={'search'} style={{
         position: 'absolute',
@@ -30,4 +52,4 @@ const Search = () => {
   )
 };
 
-export default Search;
+export default connect()(Search);

@@ -50,11 +50,12 @@ const Home = (props) => {
           <FlatList
             data={props.listProducts}
             renderItem={(item) => (
-              <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                <TouchableOpacity onPress={()=>{handleAddToCart(item.item)}}><Card name={item.item.name}/></TouchableOpacity>
+              <View style={{ width: '30%', flexDirection: 'column', margin: '2%' }}>
+                <TouchableOpacity onPress={()=>{handleAddToCart(item.item)}}><Card name={item.item.name} image={item.item.image}/></TouchableOpacity>
               </View>
             )}
             numColumns={3}
+            keyExtractor={(item, index) => index}
           />
         </ScrollView>
       </View>
