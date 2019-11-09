@@ -11,7 +11,7 @@ const cart = (state = initialState, action) => {
       const newListAddQty = state.listCart.map(item => {
         if (item.id === action.data.id) {
           exist = true;
-          return {...item, qty: item.qty + 1}
+          return {...item, qty: item.qty + 1, subtotal: item.subtotal + item.price}
         }
         return item;
       });
@@ -24,7 +24,7 @@ const cart = (state = initialState, action) => {
       };
     case 'PLUS_CART_QTY':
       const newListCartPlus = state.listCart.map(item => {
-        if (item.id === action.data.id) return {...item, qty: item.qty + 1};
+        if (item.id === action.data.id) return {...item, qty: item.qty + 1, subtotal: item.subtotal + item.price};
         return item;
       });
       return {
@@ -35,7 +35,7 @@ const cart = (state = initialState, action) => {
       };
     case 'MINUS_CART_QTY':
       const newListCartMinus = state.listCart.map(item => {
-        if (item.id === action.data.id) return {...item, qty: item.qty - 1};
+        if (item.id === action.data.id) return {...item, qty: item.qty - 1, subtotal: item.subtotal - item.price};
         return item;
       });
       return {

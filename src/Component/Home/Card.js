@@ -5,13 +5,11 @@ const Card = (props) => {
   return (
     <View style={{
       flex: 1,
-      // paddingTop: 15,
       paddingHorizontal: 2,
       paddingBottom: 20,
     }}>
       <View>
         <View style={{
-          // width: 130,
           height: 100,
           borderRadius: 5,
         }}>
@@ -29,10 +27,12 @@ const Card = (props) => {
           />
         </View>
         <Text style={{
+          // backgroundColor: 'black',
+          // color: 'white',
           marginTop: -20,
-          fontSize: 15,
+          fontSize: 13,
+          textAlign: 'center',
           color: '#1c1c1c',
-          alignSelf: 'center',
         }}>{props.name}</Text>
       </View>
     </View>

@@ -24,7 +24,6 @@ const Register = (props) => {
       .then(response => {
         if (response.value.data.status === 200) {
           alert(response.value.data.message);
-          props.navigation.navigate('StackHome');
         } else {
           alert(response.value.data.message);
         }

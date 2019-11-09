@@ -61,7 +61,7 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'POST_PRODUCT_FULFILLED':
-      const newListProduct = state.listProducts.push(action.payload.data.results);
+      const newListProduct = {...state.listProducts, products: [...state.listProducts.products, action.payload.data.results]};
       return {
         ...state,
         isLoading: false,
@@ -82,10 +82,11 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'UPDATE_PRODUCT_FULFILLED':
-      const updatedListProducts = state.listProducts.map(product=>{
-        if (product.id === action.payload.data.results.id) return action.payload.data.results;
+      // const newListProduct = {...state.listProducts, products: [...state.listProducts.products, action.payload.data.results]};
+      const updatedListProducts = {...state.listProducts, products: state.listProducts.products.map(product=>{
+        if (product.id == action.payload.data.results.id) return action.payload.data.results;
         return product;
-      });
+      })};
       return {
         ...state,
         isLoading: false,
@@ -106,7 +107,8 @@ const product = (state = initialState, action) => {
         isRejected: true,
       };
     case 'DELETE_PRODUCT_FULFILLED':
-      const deletedListProducts = state.listProducts.filter(product=>product !== action.payload.data.results.id);
+      const deletedListProducts = {...state.listProducts, products: state.listProducts.products.filter(product=>product.id != action.payload.data.results.id)};
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk -> ', deletedListProducts);
       return {
         ...state,
         isLoading: false,

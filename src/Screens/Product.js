@@ -1,16 +1,41 @@
 import React from 'react';
-import {View} from 'react-native';
-import { ListItem, Text, Left, Body, Right, Thumbnail, Button, Icon } from 'native-base';
+import {ScrollView, View} from 'react-native';
+import { ListItem, Text, Left, Body, Right, Thumbnail, Button, Icon, Header, Title} from 'native-base';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import {connect} from 'react-redux';
 import StatusBar from "../Component/StatusBar";
+import {deleteProduct} from "../Redux/Actions/product";
 
 const Product = (props) => {
+  const handleDelete = id => {
+    props.dispatch(deleteProduct(id))
+      .then(response => {
+        if (response.value.data.status === 200) {
+          alert(response.value.data.message);
+          props.navigation.navigate('Product');
+        } else {
+          alert(response.value.data.message);
+        }
+      });
+  };
+
   return (
     <View style={{
       flex: 1,
     }}>
       <StatusBar/>
+      {/* ========== Header ========== */}
+      <Header style={{
+        backgroundColor: 'green',
+      }}>
+        <Body style={{
+          alignItems: 'center',
+        }}>
+          <Title>Product Manager</Title>
+        </Body>
+      </Header>
+      {/* ======== End Header ======== */}
+      <ScrollView>
       {props.listProducts.map(product => (
         <SwipeRow leftOpenValue={75} rightOpenValue={-75} key={product.id}>
           <View style={{
@@ -21,10 +46,10 @@ const Product = (props) => {
             justifyContent: 'space-between',
             padding: 15,
           }}>
-            <Button transparent onPress={()=>alert('edit')}><Icon name={'create'} style={{
+            <Button transparent onPress={()=>props.navigation.navigate('EditProduct', {product})}><Icon name={'create'} style={{
               color: 'blue',
             }}/></Button>
-            <Button transparent onPress={()=>alert('delete')}><Icon name={'trash'} style={{
+            <Button transparent onPress={()=>handleDelete(product.id)}><Icon name={'trash'} style={{
               color: 'red',
             }}/></Button>
           </View>
@@ -52,7 +77,8 @@ const Product = (props) => {
           </View>
         </SwipeRow>
       ))}
-      <Button style={{
+      </ScrollView>
+      <Button onPress={()=>props.navigation.navigate('AddProduct')} style={{
         position: 'absolute',
         fontSize: 20,
         borderRadius: 25,

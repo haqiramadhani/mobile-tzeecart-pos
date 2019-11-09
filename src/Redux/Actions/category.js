@@ -16,7 +16,7 @@ export const getCategory = (data) => {
 export const postCategory = (data) => {
   return {
     type: 'POST_CATEGORY',
-    payload: axios.post('https://tzeecart-pos.herokuapp.com/category', data, {headers: {Authorization: token}})
+    payload: axios.post('https://tzeecart-pos.herokuapp.com/category', data, {headers: {Authorization: token}}),
   };
 };
 

@@ -1,18 +1,42 @@
 import React from 'react';
-import {View} from 'react-native';
-import { ListItem, Text, Left, Body, Thumbnail, Button, Icon } from 'native-base';
+import {ScrollView, View} from 'react-native';
+import {ListItem, Text, Left, Body, Thumbnail, Button, Icon, Header, Title} from 'native-base';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import {connect} from 'react-redux';
 import StatusBar from "../Component/StatusBar";
+import {deleteCategory} from "../Redux/Actions/category";
 
 const Category = (props) => {
-  console.log(props);
+  const handleDelete = id => {
+    props.dispatch(deleteCategory(id))
+      .then(response => {
+        if (response.value.data.status === 200) {
+          alert(response.value.data.message);
+          props.navigation.navigate('Category');
+        } else {
+          alert(response.value.data.message);
+        }
+      });
+  };
+
   return (
     <View style={{
       flex: 1,
     }}>
       <StatusBar/>
-      {props.listProducts.map(category => (
+      {/* ========== Header ========== */}
+      <Header style={{
+        backgroundColor: 'green',
+      }}>
+        <Body style={{
+          alignItems: 'center',
+        }}>
+          <Title>Category Manager</Title>
+        </Body>
+      </Header>
+      {/* ======== End Header ======== */}
+      <ScrollView>
+      {props.listCategories.map(category => (
         <SwipeRow leftOpenValue={75} rightOpenValue={-75} key={category.id}>
           <View style={{
             alignItems: 'center',
@@ -22,10 +46,10 @@ const Category = (props) => {
             justifyContent: 'space-between',
             padding: 15,
           }}>
-            <Button transparent onPress={()=>alert('edit')}><Icon name={'create'} style={{
+            <Button transparent onPress={()=>props.navigation.navigate('EditCategory', {category})}><Icon name={'create'} style={{
               color: 'blue',
             }}/></Button>
-            <Button transparent onPress={()=>alert('delete')}><Icon name={'trash'} style={{
+            <Button transparent onPress={()=>handleDelete(category.id)}><Icon name={'trash'} style={{
               color: 'red',
             }}/></Button>
           </View>
@@ -47,7 +71,8 @@ const Category = (props) => {
           </View>
         </SwipeRow>
       ))}
-      <Button style={{
+      </ScrollView>
+      <Button onPress={()=>props.navigation.navigate('AddCategory')} style={{
         position: 'absolute',
         fontSize: 20,
         borderRadius: 25,
@@ -63,7 +88,7 @@ const Category = (props) => {
 
 const mapStateToProps = state => {
   return {
-    listProducts: state.category.listCategories
+    listCategories: state.category.listCategories
   }
 };
 

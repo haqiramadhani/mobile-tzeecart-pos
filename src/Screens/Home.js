@@ -38,7 +38,7 @@ const Home = (props) => {
           <Search/>
         </View>
         <View>
-          <Cart/>
+          <Cart toCart={()=>props.navigation.navigate('Cart')}/>
         </View>
       </View>
       {/*========= Sort & Order =========*/}

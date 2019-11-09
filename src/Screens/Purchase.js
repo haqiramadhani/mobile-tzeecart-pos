@@ -1,12 +1,28 @@
 import React from 'react';
-import {Text, View} from "react-native";
+import {ScrollView, View} from "react-native";
 import StatusBar from "../Component/StatusBar";
+import {Body, Header, Title} from "native-base";
 
 const Purchase = () => {
   return (
-    <View>
+    <View style={{
+      flex: 1,
+    }}>
       <StatusBar/>
-      <Text>Purchase</Text>
+      {/* ========== Header ========== */}
+      <Header style={{
+        backgroundColor: 'green',
+      }}>
+        <Body style={{
+          alignItems: 'center',
+        }}>
+          <Title>Purchase Manager</Title>
+        </Body>
+      </Header>
+      {/* ======== End Header ======== */}
+      <ScrollView>
+
+      </ScrollView>
     </View>
   )
 };

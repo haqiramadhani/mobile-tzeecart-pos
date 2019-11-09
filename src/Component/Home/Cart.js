@@ -11,7 +11,7 @@ const Cart = (props) => {
       paddingRight: 30,
       position: 'relative',
     }}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>{props.toCart()}}>
         <Icon name={'cart'}/>
         <Badge value={props.total} badgeStyle={{
           position: 'absolute',

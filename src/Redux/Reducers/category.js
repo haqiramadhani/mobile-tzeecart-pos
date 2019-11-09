@@ -41,7 +41,7 @@ const category = (state = initialState, action) => {
         isRejected: true,
       };
     case 'POST_CATEGORY_FULFILLED':
-      const newListCategories = state.listCategories.push(action.payload.data.results);
+      const newListCategories = [...state.listCategories, action.payload.data.results];
       return {
         ...state,
         isLoading: false,
@@ -63,7 +63,7 @@ const category = (state = initialState, action) => {
       };
     case 'UPDATE_CATEGORY_FULFILLED':
       const updatedListCategories = state.listCategories.map(category=>{
-        if (category.id === action.payload.data.results.id) return action.payload.data.results;
+        if (category.id == action.payload.data.results.id) {return action.payload.data.results}
         return category;
       });
       return {
@@ -86,7 +86,7 @@ const category = (state = initialState, action) => {
         isRejected: true,
       };
     case 'DELETE_CATEGORY_FULFILLED':
-      const deletedListCategories = state.listCategories.filter(category=>category !== action.payload.data.results.id);
+      const deletedListCategories = state.listCategories.filter(category=> category.id != action.payload.data.results.id);
       return {
         ...state,
         isLoading: false,
